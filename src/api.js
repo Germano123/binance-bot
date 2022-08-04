@@ -75,4 +75,8 @@ async function depth(symbol="BTCBRL", limit=5) {
     return publicCall("v3/depth", { symbol, limit });
 }
 
-module.exports = { time, depth, accountInfo, exchangeInfo, newOrder };
+async function tickerPrice(symbol="BTCBRL") {
+    return publicCall("v3/ticker/price", { symbol })
+}
+
+module.exports = { time, depth, tickerPrice, accountInfo, exchangeInfo, newOrder };
