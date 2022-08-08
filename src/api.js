@@ -71,12 +71,16 @@ async function time() {
     return publicCall("v3/time");
 }
 
-async function depth(symbol="BTCBRL", limit=5) {
+async function depth(symbol="BTCUSDT", limit=5) {
     return publicCall("v3/depth", { symbol, limit });
 }
 
-async function tickerPrice(symbol="BTCBRL") {
+async function tickerPrice(symbol="BTCUSDT") {
     return publicCall("v3/ticker/price", { symbol })
 }
 
-module.exports = { time, depth, tickerPrice, accountInfo, exchangeInfo, newOrder };
+async function lastCandle(symbol="BTCUSDT", interval="1m", limit=1) {
+    return publicCall("v3/klines", { symbol, interval, limit })
+}
+
+module.exports = { time, depth, tickerPrice, accountInfo, exchangeInfo, newOrder, lastCandle };
