@@ -17,7 +17,7 @@ let amountSpent, amountRecieved;
 // control variable if last order was buy or sell
 let bought = false, sold = false;
 
-setInterval(async() => {
+const bot = setInterval(async() => {
     // console.log(await api.lastCandle());
 }, interval);
 
