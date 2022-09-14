@@ -37,11 +37,11 @@ async function privateCall(path, data={}, method="GET") {
 }
 
 async function accountInfo() {
-    return privateCall("v3/account");
+    return privateCall("/v3/account");
 }
 
 async function exchangeInfo() {
-    return privateCall("v3/exchangeInfo");
+    return privateCall("/v3/exchangeInfo");
 }
 
 async function newOrder(symbol, quantity, price, side="BUY", type="MARKET") {
@@ -50,7 +50,7 @@ async function newOrder(symbol, quantity, price, side="BUY", type="MARKET") {
     if (price) data.price = price;
     if (type == "LIMIT") data.timeInForce = "GTC";
 
-    return privateCall("v3/order", data, "POST");
+    return privateCall("/v3/order", data, "POST");
 }
 
 async function publicCall(path, data, method="GET") {
@@ -68,11 +68,15 @@ async function publicCall(path, data, method="GET") {
 }
 
 async function time() {
-    return publicCall("v3/time");
+    return publicCall("/v3/time");
 }
 
 async function depth(symbol="BTCBRL", limit=5) {
-    return publicCall("v3/depth", { symbol, limit });
+    return publicCall("/v3/depth", { symbol, limit });
 }
 
-module.exports = { time, depth, accountInfo, exchangeInfo, newOrder };
+async function tickerPrice(symbol="BTCBRL") {
+    return publicCall("/v3/ticker/price", { symbol });
+}
+
+module.exports = { time, depth, accountInfo, exchangeInfo, newOrder, tickerPrice };
